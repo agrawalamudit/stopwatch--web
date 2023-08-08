@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+</head>
+<style>
+    *
+    {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .box
+    {
+        margin: auto;
+        width: 300px;
+        height: 160px;
+        background-color: pink;
+        padding: 50px;
+        border-radius: 10px;
+    }
+    #para
+    {
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+    }
+    .btn 
+    {
+        background-color: rgba(172, 172, 172, 0.568);
+        padding: 5px;
+        border-radius: 12px;
+        align-items: center;
+        margin: 0px 8px;
+    }
+    
+</style>
+
+
+<body>
+
+    <div class="box">
+        <p id="para">00:00:00</p>
+        <br>
+        <button class = "btn" id="start" onclick="start()">Start</button>
+        <button class = "btn" id="stop" onclick="stop()">Stop</button>
+        <button class = "btn" id="restart" onclick="restart()">Restart</button>
+    </div>
+
+</body>
+
+
+<script>
+    let a = document.getElementById("para");
+    let [seconds, minutes, hours] = [0, 0, 0];
+    let i;
+
+    function start() {
+        i = setInterval(function () {
+
+            seconds++;
+            if (seconds == 60) {
+                seconds = 0;
+                minutes++;
+                if (minutes == 60) {
+                    minutes=0;
+                    hours++;
+                }
+            }
+
+            let h = hours < 10 ? "0" + hours : hours;
+            let m = minutes < 10 ? "0" + minutes : minutes;
+            let s = seconds < 10 ? "0" + seconds : seconds;
+
+            a.innerText = h + ":" + m + ":" + s;
+
+        }, 1000)
+        return i;
+    }
+
+    function stop() {
+        clearInterval(i);
+    }
+
+    function restart() {
+        seconds = 0, minutes = 0, hours = 0;
+        clearInterval(i);
+        i = start();
+    }
+
+</script>
+
+</html>
